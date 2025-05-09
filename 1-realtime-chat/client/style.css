@@ -1,0 +1,78 @@
+body {
+    box-sizing: border-box;
+    margin: auto;
+    padding: 0;
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    
+    align-items: center;
+    background-color: #f4f4f4;
+    height: calc(100vh - 20px);
+    
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color:#005cbe;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+#messages {
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color:whitesmoke;
+}
+
+.send-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    
+    font-size: 16px;
+}
+
+form{
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+
