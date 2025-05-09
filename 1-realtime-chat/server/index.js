@@ -32,6 +32,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(process.cwd(), 'client', 'index.html'));
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
