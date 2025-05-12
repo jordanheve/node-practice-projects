@@ -9,7 +9,9 @@ import { createServer } from 'node:http';
 const port = process.env.PORT || 3000;
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+connectionStateRecovery: {},
+});
 
 io.on('connection', (socket) => {
     console.log('A user connected');
@@ -19,9 +21,12 @@ io.on('connection', (socket) => {
         io.emit('chat message', msg);
     });
 
+
+
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
+
 });
 
 app.use(express.static(path.join(process.cwd(), 'client')));

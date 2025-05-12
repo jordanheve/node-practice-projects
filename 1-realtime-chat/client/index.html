@@ -12,6 +12,14 @@
         const form = document.getElementById('message-form');
         const input = document.getElementById('input-message');
 
+        socket.on("chat message", (message) => {
+            const messages = document.getElementById('messages');
+            const newMessage = document.createElement('div');
+            newMessage.textContent = message;
+            messages.appendChild(newMessage);
+        });
+        
+
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             const message = input.value;
@@ -33,7 +41,7 @@
             
         </div>
         <form action="" id="message-form">
-            <input type="text" name="" id="input-message" class="input-field"  placeholder="Enter your message" required>
+            <input autocomplete="off" type="text" name="" id="input-message" class="input-field"  placeholder="Enter your message" required>
             <button type="submit" class="send-button" id="send-button">Send</button>
         </form>
     </section>
