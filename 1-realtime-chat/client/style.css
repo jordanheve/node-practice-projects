@@ -61,6 +61,20 @@ section {
     }
 }
 
+.username {
+    color:#005cbe;
+    font-weight: bold;
+    margin: 0;
+}
+
+.message {
+    color: #333;
+    padding: 0;
+    margin: 0;
+    margin-top: .3rem;
+    word-wrap: break-word;
+}
+
 .send-button {
     background-color: #007bff;
     color: white;

@@ -7,18 +7,64 @@
     <link rel="stylesheet" href="style.css">
     <script type="module" >
          import { io } from 'https://cdn.socket.io/4.3.2/socket.io.esm.min.js'
-        const socket = io();
+        const getUsername = async () => {
+            let username = localStorage.getItem('username');
+            
+            if (!username || username === 'null') { 
+            console.log('No username found');
+            username = prompt('What is your name?');
+            username = !username ? 'Anonymous' : username.trim();
+            localStorage.setItem('username', username);
+            } else {
+            console.log('Username found', username);
+            }
+            
+            return username;
+        }
+        const socket = io({
+            auth: {
+                serverOffset: 0,
+                username: await getUsername()
+            }
+        });
 
         const form = document.getElementById('message-form');
         const input = document.getElementById('input-message');
 
-        socket.on("chat message", (message) => {
-            const messages = document.getElementById('messages');
+        const createNewMessage = (username, message) =>{
             const newMessage = document.createElement('div');
-            newMessage.textContent = message;
+            const messageP = document.createElement('p');
+            const usernameP = document.createElement('p');
+            messageP.textContent = message;
+            usernameP.textContent = username;
+            messageP.classList.add('message');
+            usernameP.classList.add('username');
+
+            newMessage.appendChild(usernameP);
+            newMessage.appendChild(messageP);
+
+            return newMessage;
+        }
+       
+
+        socket.on("chat message", (message, serverOffset, username) => {
+            const messages = document.getElementById('messages');    
+            const newMessage = createNewMessage(username, message);
+            
             messages.appendChild(newMessage);
+            socket.auth.serverOffset = serverOffset;
+            messages.scrollTop = messages.scrollHeight;
         });
-        
+        socket.on('chat history', (results) => {
+            const messages = results?.rows ?? [];
+            messages.reverse().forEach((message) => {
+                    
+                const messagesContainer = document.getElementById('messages');
+                const newMessage = createNewMessage(message[2], message[1]);
+                
+                messagesContainer.appendChild(newMessage);
+            });
+        })
 
         form.addEventListener("submit", (e) => {
             e.preventDefault();
